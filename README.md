@@ -3,7 +3,9 @@ Programs the SST39SF010A and probably other JEDEC-compatible flash chips too.
 
 # Circuit
 ![Schematic](./schematic.png)
-The circuit is essentially ATMEGA328P on a breadboard, connected to two 74HC595 shift registers. The shift registers are chained to each other, and connected to the flash chip's address bus. Port B of the MCU is connected to the flash chip's data bus.
+The RX and TX labels should be connected to some sort of USB-to-serial/FTDI adapter. Make sure that the MCU's RX connects to your adapter's TX and vice versa!
+
+The circuit is essentially an ATMEGA328P on a breadboard, connected to two 74HC595 shift registers. The shift registers are chained to each other, and connected to the flash chip's address bus. Port B of the MCU is connected to the flash chip's data bus.
 
 This would require modifications to work on an Arduino Uno or an ATMEGA328P with external crystal because the crystal is connected to port B, which is used here for data. It _should_ work on other JEDEC-compatible flash chips but you should check the datasheet of that chip to make sure that the software data protection routine and things like that are the same. In addition, this will only be able to program the first 32 KiB. Accessing more than that would require an additional shift register and code changes. (right now the code assumes address is a `short`)
 
